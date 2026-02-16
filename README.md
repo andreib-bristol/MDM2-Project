@@ -1,3 +1,3 @@
 # MDM2-Project
 
-creating codespace
+# WEEK 1
