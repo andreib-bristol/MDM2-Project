@@ -41,9 +41,30 @@ u2 = unit_heading(d2)
 #print(u1.shape, u2.shape)
 
 
-dots = np.sum(u1 * u2, axis=1)
-C0 = np.nanmean(dots)
 
-print("C_ij(0) =", C0)
-print("first 5 dot products:", dots[:5])
+def C_lag(u1, u2, L):
+    N = len(u1)
+    if L > 0:
+        a = u1[0:N-L]
+        b = u2[L:N]
+    elif L < 0:
+        L = -L
+        a = u1[L:N]
+        b = u2[0:N-L]
+    else:
+        a = u1
+        b = u2
+    dots = np.sum(a * b, axis=1)
+    return np.nanmean(dots)
 
+
+lags = list(range(-10, 11))
+C_values = [C_lag(u1, u2, L) for L in lags]
+
+best_idx = int(np.nanargmax(C_values))
+best_L = lags[best_idx]
+best_C = C_values[best_idx]
+
+print("best lag:", best_L, "samples")
+print("best time delay:", best_L * 0.2, "seconds")
+print("best cos(theta):", best_C)
