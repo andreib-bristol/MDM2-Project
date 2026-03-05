@@ -1,9 +1,9 @@
 import pandas as pd
 import numpy as np
-
+import matplotlib.pyplot as plt
 
 file1 = "pigeonflocks_trajectories/ff1/ff1_A.txt"
-file2 = "pigeonflocks_trajectories/ff1/ff1_F.txt"
+file2 = "pigeonflocks_trajectories/ff1/ff1_G.txt"
 
 
 data1 = pd.read_csv(file1, sep=r"\s+", skiprows=19, header=None)
@@ -42,15 +42,15 @@ u2 = unit_heading(d2)
 
 
 
-def C_lag(u1, u2, L):
-    N = len(u1)
-    if L > 0:
-        a = u1[0:N-L]
-        b = u2[L:N]
-    elif L < 0:
-        L = -L
-        a = u1[L:N]
-        b = u2[0:N-L]
+def time_delay(u1, u2, t):
+    n = len(u1)
+    if t > 0:
+        a = u1[0:n-t]
+        b = u2[t:n]
+    elif t < 0:
+        t = -t
+        a = u1[t:n]
+        b = u2[0:n-t]
     else:
         a = u1
         b = u2
@@ -58,13 +58,24 @@ def C_lag(u1, u2, L):
     return np.nanmean(dots)
 
 
-lags = list(range(-10, 11))
-C_values = [C_lag(u1, u2, L) for L in lags]
+delays = list(range(-5, 5  ))
+angles = [time_delay(u1, u2, L) for L in delays]
 
-best_idx = int(np.nanargmax(C_values))
-best_L = lags[best_idx]
-best_C = C_values[best_idx]
+best_idx = int(np.nanargmax(angles))
+best_delay = delays[best_idx]
+best_angle = angles[best_idx]
 
-print("best lag:", best_L, "samples")
-print("best time delay:", best_L * 0.2, "seconds")
-print("best cos(theta):", best_C)
+print("best time delay:", best_delay, "samples")
+print("best time delay:", best_delay * 0.2, "seconds")
+print("best cos(theta):", best_angle)
+
+dt = 0.2
+delays = np.array(delays) * dt
+angles = np.array(angles)
+
+plt.figure()
+plt.plot(delays, angles)
+plt.xlabel("time delay")
+plt.ylabel("cos(theta) values")
+plt.grid()
+plt.show()
