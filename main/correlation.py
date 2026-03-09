@@ -100,34 +100,7 @@ def _shift_for_lag(arr: np.ndarray, lag_steps: int) -> Tuple[np.ndarray, np.ndar
         return a, b
 
 
-def masked_directional_correlation_for_pair(
-    u_i: np.ndarray, u_j: np.ndarray,
-    valid_i: np.ndarray, valid_j: np.ndarray,
-    d_ij: np.ndarray,
-    tau_grid: np.ndarray,
-    distance_limit_m: float = 100.0,
-    min_points: int = 50,
-) -> Tuple[np.ndarray, np.ndarray]:
-    """
-    Compute C_ij(tau) for one pair (i,j) over tau_grid.
-    Uses:
-      usable[t] = valid_i[t] & valid_j[t] & (d_ij[t] < distance_limit_m),
-      then for lag we apply the appropriate overlap.
 
-    Returns:
-      C: (L,) correlation values (nan if insufficient points)
-      n_used: (L,) number of points used for each tau
-    """
-    T = u_i.shape[0]
-    assert u_j.shape[0] == T
-    assert valid_i.shape[0] == T and valid_j.shape[0] == T and d_ij.shape[0] == T
-
-    # low‑level helper – callers should use compute_delay_matrices()
-    #dt = float(np.median(np.diff(tau_grid))) if len(tau_grid) > 1 else 0.2  # not critical
-    # Convert tau values (seconds) to integer steps based on spacing of tau_grid itself? Better: caller uses dt data.
-    # We'll accept tau_grid as already multiples of the data dt. We'll infer steps by rounding tau / data_dt outside.
-    # Here we just use integer steps passed in by mapping function.
-    raise RuntimeError("Use compute_delay_matrices(), not this low-level function directly.")
 
 
 def compute_delay_matrices(
