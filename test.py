@@ -3,8 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import levene
 
-import Trimmed_Flight_Data.ff1_data
-data = Trimmed_Flight_Data.ff1_data.data
+import Trimmed_Flight_Data.hf2_data
+data = Trimmed_Flight_Data.hf2_data.data
 
 rows = []
 
@@ -57,3 +57,11 @@ def test_acc_variance_birds(df):
 
 test_speed_variance_birds(df)
 test_acc_variance_birds(df)
+variance_summary = df.groupby("bird_id")[["speed", "acc_mag"]].var()
+print(variance_summary)
+
+df_trimmed = df[(df["t"] >= 0) & (df["t"] <= 750)]
+test_speed_variance_birds(df_trimmed)
+test_acc_variance_birds(df_trimmed)
+variance_summary = df_trimmed.groupby("bird_id")[["speed", "acc_mag"]].var()
+print(variance_summary)
