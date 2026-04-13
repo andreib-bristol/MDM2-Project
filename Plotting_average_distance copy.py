@@ -2,12 +2,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # ---- choose your inputs here ----
-import Trimmed_Flight_Data.hf4_data   # change to ff2_data, ff3_data, etc.
-CENTROIDS_TXT = "centroids_h4.txt"       # centroids for the same flight
+import Trimmed_Flight_Data.ff3_data   # change to ff2_data, ff3_data, etc.
+CENTROIDS_TXT = "Centroids/centroids_3.txt"       # centroids for the same flight
 DT_SECONDS = 0.2                      # 20 centiseconds
 # ---------------------------------
 
-data = Trimmed_Flight_Data.hf4_data.data
+data = Trimmed_Flight_Data.ff3_data.data
 
 
 def load_centroids(path):
