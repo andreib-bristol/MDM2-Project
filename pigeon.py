@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 import Trimmed_Flight_Data.ff1_data
 data = Trimmed_Flight_Data.ff1_data.data
 
+data3 = data["A"]
+
 
 file1 = "pigeonflocks_trajectories/ff1/ff1_A.txt"
 file2 = "pigeonflocks_trajectories/ff1/ff1_G.txt"
@@ -13,11 +15,14 @@ file2 = "pigeonflocks_trajectories/ff1/ff1_G.txt"
 data1 = pd.read_csv(file1, sep=r"\s+", skiprows=19, header=None)
 data2 = pd.read_csv(file2, sep=r"\s+", skiprows=19, header=None)
 
+print(data1.shape, data2.shape)
 columns = ["t","x", "y", "z","vx", "vy", "vz","ax", "ay", "az","gps"]
 
 data1.columns = columns
 data2.columns = columns
 
+
+'''
 t_start = max(data1["t"].min(), data2["t"].min())
 t_end   = min(data1["t"].max(), data2["t"].max())
 
@@ -83,3 +88,5 @@ plt.xlabel("time delay")
 plt.ylabel("cos(theta) values")
 plt.grid()
 plt.show()
+
+'''
