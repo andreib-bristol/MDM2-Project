@@ -136,8 +136,14 @@ def bootstrap_correlation(ti_a: np.ndarray, ti_b: np.ndarray,
 
     for i in range(n_boot):
         idx = rng.integers(0, n, size=n)
-        r, _ = spearmanr(ti_a[idx], ti_b[idx])
-        boot_r[i] = r
+        a_sample = ti_a[idx]
+        b_sample = ti_b[idx]
+        # Skip if either resampled array is constant — spearman undefined
+        if np.all(a_sample == a_sample[0]) or np.all(b_sample == b_sample[0]):
+            boot_r[i] = 0.0
+            continue
+        r, _ = spearmanr(a_sample, b_sample)
+        boot_r[i] = r if not np.isnan(r) else 0.0 # type: ignore
 
     alpha = (1 - ci) / 2
     return float(np.quantile(boot_r, alpha)), float(np.quantile(boot_r, 1 - alpha))
