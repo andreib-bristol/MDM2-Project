@@ -1,3 +1,2 @@
-# MDM2-Project
-
-# WEEK 1
+# MDM2-Project Group 9 - Interactions in Pigeon Flocks
+# 
