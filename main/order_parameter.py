@@ -187,9 +187,9 @@ def plot_mean_phi_vs_mean_cmax(
         ax.plot(x_line, m * x_line + b, "k--", linewidth=1, alpha=0.4)
         r, p = pearsonr(phi_vals[valid], cmax_vals[valid])
         ax.set_title(f"Mean order parameter vs mean C_max (all flights)\n"
-                     f"Pearson r={r:+.3f}, p={p:.3f}, n={valid.sum()} flights")
+                     f"Pearson r={r:+.3f}, p={p:.3f}, n={valid.sum()} flights", fontsize=18)
     else:
-        ax.set_title("Mean order parameter vs mean C_max")
+        ax.set_title("Mean order parameter vs mean C_max", fontsize=18)
 
     # Legend
     legend_handles = [
@@ -204,8 +204,8 @@ def plot_mean_phi_vs_mean_cmax(
     ]
     ax.legend(handles=legend_handles, fontsize=8, loc="upper left")
 
-    ax.set_xlabel("Mean φ (order parameter)")
-    ax.set_ylabel("Mean C_max (directional correlation)")
+    ax.set_xlabel("Mean φ (order parameter)", fontsize=18)
+    ax.set_ylabel("Mean C_max (directional correlation)", fontsize=18)
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
     plt.tight_layout()

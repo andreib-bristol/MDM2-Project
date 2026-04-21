@@ -81,15 +81,13 @@ def plot_hierarchy_network(analysis: dict, flight_name: str = "hf4",
     nx.draw_networkx_nodes(
         G, pos, ax=ax,
         node_color=node_colors,
-        node_size=1600,
+        node_size=2400,
         alpha=0.9,
     )
 
-    nx.draw_networkx_labels(G, pos, ax=ax, font_size=11, font_weight="bold")
+    nx.draw_networkx_labels(G, pos, ax=ax, font_size=16, font_weight="bold")
 
-    ti_labels  = {bird: f"ti={analysis['ti'][bird]:+.2f}s" for bird in G.nodes()}
-    offset_pos = {bird: (x, y - 18) for bird, (x, y) in pos.items()}
-    nx.draw_networkx_labels(G, offset_pos, labels=ti_labels, ax=ax, font_size=7)
+    
 
     nx.draw_networkx_edges(
         G, pos, ax=ax,
@@ -102,21 +100,16 @@ def plot_hierarchy_network(analysis: dict, flight_name: str = "hf4",
         connectionstyle="arc3,rad=0.1",
     )
 
-    edge_tau_labels = {(u, v): f"{G[u][v]['tau']:+.2f}s" for u, v in G.edges()}
-    nx.draw_networkx_edge_labels(
-        G, pos, edge_labels=edge_tau_labels,
-        ax=ax, font_size=6, label_pos=0.3,
-    )
+    
 
     sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
     sm.set_array([])
     cbar = plt.colorbar(sm, ax=ax, shrink=0.6, pad=0.02)
-    cbar.set_label("t_i (s) — green = leader, red = follower", fontsize=9)
+    
 
     ax.set_title(
-        f"Leader-follower network ({flight_name})\n"
-        f"Edge width proportional to C_max, label = tau* delay",
-        fontsize=12,
+        f"Leader-follower network ({flight_name})",
+        fontsize=24,
     )
     ax.axis("off")
     plt.tight_layout()
