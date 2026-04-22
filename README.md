@@ -74,8 +74,29 @@ Computes the Vicsek order parameter φ(t) = |Σ u_i(t)| / N for all 15 flights. 
 
 ## Running the Levene Test
 
-Run in order from the `Levene Test/` directory:
+Run from the `Levene Test/` directory:
 
 ```bash
 python test.py
 ```
+Runs the Levene test using the trimmed flight data and computed centroid, outputting various plots.
+
+## Running the Cohesion Analysis
+
+Run from the `Files:plots_for_ff_cohesion_analysis/` directory:
+```bash
+#Analysing Free Flights
+python Identify_MinDuration_Threshold.py
+python Autocorrelation.py
+python Plotting_average_distance copy.py
+python Bar_chart_segmentation.py
+```
+Define stable and erratic behaviour using free flight data and segment cohesion plots
+
+Run from the `hf_analysis` directory:
+```bash
+#Analyse Homing Flights
+python Plot_all_pigeons.py
+python exclude_pigeons.py
+```
+Outlier pigeons identified and excluded, centroids recalculated, and new plots made: flight map path, cohesion plots excluding outliers
