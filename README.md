@@ -72,14 +72,10 @@ Runs the full pipeline across all 15 flights. Excludes flights with mean C_max <
 **`order_parameter.py`**
 Computes the Vicsek order parameter φ(t) = |Σ u_i(t)| / N for all 15 flights. Plots φ(t) time series and a scatter plot of mean φ vs mean C_max across all flights to validate both coordination measures independently.
 
-## Key Results
+## Running the Levene Test
 
-- 6 of 15 flights passed the coordination quality threshold (mean C_max ≥ 0.5): all 4 homing flights and ff8, ff11
-- Flight hf4 produced a clear 9-bird hierarchy: A > H > B > D > J > L > C > I > G
-- Cross-flight Spearman correlation hf3 vs hf4: r_s = +0.671, 95% CI [+0.103, +0.975]
-- Paired t-test: no significant difference in leadership scores between free and homing flights (t = 0.220, p = 0.832)
-- Order parameter and directional correlation agree strongly across all 15 flights (Pearson r = +0.960, p < 0.001)
+Run in order from the `Levene Test/` directory:
 
-## Reference
-
-Nagy, M., Ákos, Zs., Biro, D., & Vicsek, T. (2010). Hierarchical group dynamics in pigeon flocks. Nature, 464, 890-893.
+```bash
+python test.py
+```
